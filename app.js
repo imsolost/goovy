@@ -4,7 +4,7 @@ const app = express()
 const path = require('path')
 const session = require('express-session')
 
-const { queries } = require('./database/queries.js')
+const { queries } = require('./database/queries')
 
 app.set( 'view engine', 'ejs')
 // app.engine( 'html', require('ejs').renderFile )
