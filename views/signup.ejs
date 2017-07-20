@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>signup</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='style.css'/>
+    <link href="https://fonts.googleapis.com/css?family=Poller+One|Source+Sans+Pro" rel="stylesheet">
   </head>
-  <body>
-    This is the sign up page
-    <form class="form-class" action="/signup" method="post">
-      <input type="text" name="email" value="" placeholder="email">
-      <input type="password" name="password" value="" placeholder="password">
-      <input type="submit" value="Sign Up" />
-    </form>
+
+  <body class="column">
+    <h1>Movie Search Engine<h2>
+    <div class="login column">
+      <h2>Signup</h2>
+      <form class="column" action="/signup" method="post">
+        Name:<br>
+        <input type="text" name="name" class="orange-input">
+        Email:<br>
+        <input type="text" name="email" class="orange-input">
+        Password:<br>
+        <input type="password" name="password" class="orange-input">
+        Confirm password:<br>
+        <input type="password" name="confirm" class="orange-input">
+        <input type="submit" name="submit" class="orange-button">
+      </form>
+    </div>
   </body>
 </html>

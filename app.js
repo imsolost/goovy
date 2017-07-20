@@ -7,7 +7,6 @@ const session = require('express-session')
 const { queries } = require('./database/queries')
 
 app.set( 'view engine', 'ejs')
-// app.engine( 'html', require('ejs').renderFile )
 app.use(express.static(path.join(__dirname, 'public')))
 app.use( bodyParser.json() )
 app.use( bodyParser.urlencoded({ extended: true }) )
@@ -19,7 +18,9 @@ app.use( session({
 
 app.get('/', (req, res) => {
   if (req.session.userid) {
-    res.render('home')
+    res.render('home', {
+      title: 'movie name' //include dynamic movie name
+    })
   } else {
     res.render('signin')
   }
@@ -55,9 +56,11 @@ app.post('/signin', (req, res) => {
 
 app.post('/signup', (req, res) => {
   const user = req.body
-  queries.create( user.email, user.password )
-    .then( data => req.session.userid = data.id )
-    .then( () => res.redirect('/') )
+  if (user.password === user.confirm) {
+    queries.create( user.email, user.password )
+      .then( data => req.session.userid = data.id )
+      .then( () => res.redirect('/') )
+  }
 })
 
 app.listen( 3000, () => {

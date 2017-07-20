@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>home</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='style.css'/>
+    <link href="https://fonts.googleapis.com/css?family=Poller+One|Source+Sans+Pro" rel="stylesheet">
   </head>
-  <body>
-    Welcome to Goovy!
-    It's like Google...for movies
-    <input
-      type="text"
-      value=""
-      placeholder="search for a movie..."
-    />
-    <button>Search</button>
 
-    <a href="/signout">
-      <button>Sign Out</button>
-    </a>
+  <body>
+    <div>
+      <h1>Movie Search Engine</h1>
+
+      <form class='column'>
+        <input type='text' class='search' name="movie" placeholder="search for a movie"/><br>
+        <input type='submit' name='submit' class='orange-button'/>
+      </form>
+
+      <div class="results">
+        <h2>Search results for <%=title%></h2>
+      </div>
+
+    </div>
+
+    <a href="/signout" class="logout">Sign Out</a>
 
   </body>
 </html>
