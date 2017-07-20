@@ -9,13 +9,21 @@
     <div>
       <h1>Movie Search Engine</h1>
 
-      <form class='column'>
-        <input type='text' class='search' name="movie" placeholder="search for a movie"/><br>
+      <form class='column' action='/' method='post'>
+        <input type='text' class='search' name='search' placeholder="search for a movie"/><br>
         <input type='submit' name='submit' class='orange-button'/>
       </form>
 
-      <div class="results">
-        <h2>Search results for <%=title%></h2>
+      <div>
+        <%if (search[0]) {%>
+          <h2>Search results for <%=title%></h2>
+          <%for (let i=0; i < search.length; i++) { %>
+            <div class="row results">
+              <h3> <%=search[i].name %> </h3>
+              <h3> <%=search[i].year %> </h3>
+            </div>
+        <% } %>
+      <% } %>
       </div>
 
     </div>

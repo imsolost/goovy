@@ -5,6 +5,7 @@ const path = require('path')
 const session = require('express-session')
 
 const { queries } = require('./database/queries')
+const queryIMDB = require('./queryIMDB')
 
 app.set( 'view engine', 'ejs')
 app.use(express.static(path.join(__dirname, 'public')))
@@ -16,11 +17,14 @@ app.use( session({
   cookie: { maxAge: 300000 }
 }))
 
+let searchTerm = {
+    title: '',
+    search: []
+}
+
 app.get('/', (req, res) => {
   if (req.session.userid) {
-    res.render('home', {
-      title: 'movie name' //include dynamic movie name
-    })
+    res.render('home', searchTerm)
   } else {
     res.render('signin')
   }
@@ -40,6 +44,10 @@ app.get('/signin', (req, res) => {
 
 app.get('/signout', (req, res) => {
   req.session.destroy()
+  searchTerm = {
+      title: '',
+      search: []
+  }
   res.redirect('/')
 })
 
@@ -61,6 +69,15 @@ app.post('/signup', (req, res) => {
       .then( data => req.session.userid = data.id )
       .then( () => res.redirect('/') )
   }
+})
+
+app.post('/', (req, res) => {
+  searchTerm.title = req.body.search
+  queryIMDB( searchTerm.title )
+  .then ( data => {
+    searchTerm.search = data.movies
+    res.redirect('/')
+  })
 })
 
 app.listen( 3000, () => {
