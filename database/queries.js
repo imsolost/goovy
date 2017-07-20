@@ -5,7 +5,9 @@ const db = pgp( connectionString )
 exports.queries = {
   findByEmail: (email) => db.one('SELECT * FROM users WHERE email = $1', [email]),
 
-  findById: (id) => db.one('SELECT * FROM users WHERE id = $1', [id]),
+  create: (email, password) => db.one('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING (id)', [email, password]),
 
-  create: (email, password) => db.one('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING (id)', [email, password])
+  historyById: (user_id) => db.any('SELECT * FROM history WHERE user_id = $1', [user_id]),
+
+  history: (user_id, movie) => db.none('INSERT INTO history (user_id, movie) VALUES ($1, $2)', [user_id, movie])
 }

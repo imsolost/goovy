@@ -23,7 +23,7 @@ function queryIMDB(search) {
       const imgArray = $('.findSection')
         .first()
         .find('img')
-        .map( (index, element) => $(element) )
+        .map( (index, element) => $(element)[0].attribs.src )
         .toArray()
 
       let output = {'movies': []}
@@ -31,7 +31,7 @@ function queryIMDB(search) {
         let movieObject = {}
         movieObject.name = moviesArray[i]
         movieObject.year = yearsArray[i]
-        movieObject.img = imgArray[i][0].attribs.src
+        movieObject.img = imgArray[i]
         output.movies.push(movieObject)
       }
       return output

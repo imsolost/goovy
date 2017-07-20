@@ -32,7 +32,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/profile', (req, res) => {
-  res.render('profile')
+  queries.historyById( req.session.userid )
+    .then( data => res.render('profile', { history: data }) )
 })
 
 app.get('/signup', (req, res) => {
@@ -75,12 +76,13 @@ app.post('/signup', (req, res) => {
 
 app.post('/', (req, res) => {
   searchTerm.title = req.body.search
+  queries.history(req.session.userid, searchTerm.title)
   queryIMDB( searchTerm.title )
   .then ( data => {
     searchTerm.search = data.movies
     searchTerm.img = data.img
-    res.redirect('/')
   })
+  .then( () => res.redirect('/') )
 })
 
 app.listen( 3000, () => {

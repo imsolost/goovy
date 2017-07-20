@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>profile</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel='stylesheet' href='style.css'/>
+    <link href="https://fonts.googleapis.com/css?family=Poller+One|Source+Sans+Pro" rel="stylesheet">
   </head>
-  <body>
-    <a href="/signout">
-      <button>Sign Out</button>
-    </a>
+
+  <body class="column">
+    <h1>History</h1>
+
+    <div>
+      <%for (let i=0; i < history.length; i++) { %>
+        <div class='row results'>
+          <h3> <%=history[i].movie %> </h3>
+          <h3> <%=history[i].searchdate %> </h3>
+        </div>
+    <% } %>
+    </div>
+
+    <div class="logout">
+      <a href="/signout">Sign Out</a>
+      <a href="/">Home</a>
+    </div>
+
   </body>
 </html>
