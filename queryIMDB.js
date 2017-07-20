@@ -20,15 +20,20 @@ function queryIMDB(search) {
         .find('.result_text')
         .map( (index, element) => $(element).text().slice(moviesArray[index].length + 2, moviesArray[index].length + 8) )
         .toArray()
+      const imgArray = $('.findSection')
+        .first()
+        .find('img')
+        .map( (index, element) => $(element) )
+        .toArray()
 
       let output = {'movies': []}
       for (let i = 0; i < moviesArray.length; i++) {
         let movieObject = {}
         movieObject.name = moviesArray[i]
         movieObject.year = yearsArray[i]
+        movieObject.img = imgArray[i][0].attribs.src
         output.movies.push(movieObject)
       }
-      // console.log(output)
       return output
     })
     .catch( error => { throw error } )

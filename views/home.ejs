@@ -18,7 +18,8 @@
         <%if (search[0]) {%>
           <h2>Search results for <%=title%></h2>
           <%for (let i=0; i < search.length; i++) { %>
-            <div class="row results">
+            <div class='row results'>
+              <img src='<%=search[i].img %>'/>
               <h3> <%=search[i].name %> </h3>
               <h3> <%=search[i].year %> </h3>
             </div>

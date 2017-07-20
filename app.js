@@ -19,7 +19,8 @@ app.use( session({
 
 let searchTerm = {
     title: '',
-    search: []
+    search: [],
+    img: ''
 }
 
 app.get('/', (req, res) => {
@@ -46,7 +47,8 @@ app.get('/signout', (req, res) => {
   req.session.destroy()
   searchTerm = {
       title: '',
-      search: []
+      search: [],
+      img: ''
   }
   res.redirect('/')
 })
@@ -76,6 +78,7 @@ app.post('/', (req, res) => {
   queryIMDB( searchTerm.title )
   .then ( data => {
     searchTerm.search = data.movies
+    searchTerm.img = data.img
     res.redirect('/')
   })
 })
